@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CursoController;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Homecontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
- /*   return view('welcome'); */
-    return "Serge les da la Bienvenida";
-});
-Route::get('Cursos',function(){
-return "Bienvenido a la pagina de Cursos";
+Route::get('/', Homecontroller::class);
 
+Route::controller(CursoController::class)->group(function () {
+
+    Route::get('cursos', 'index');
+    Route::get('cursos/create', 'create');
+    Route::get('cursos/{curso}',  'show');
 });
